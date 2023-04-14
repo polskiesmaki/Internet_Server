@@ -9,6 +9,8 @@
 		 <ul>
 			<li><?php echo"<a href='index.php'>Main</a>"; ?></li>
 			<li><?php echo"<a href='next.php'>Projektkontakt</a>"; ?></li>
+			
+
 		 </ul>
 		</nav>
 		
@@ -25,6 +27,8 @@
 			justo duo dolores et ea rebum. Stet clita kasd gubergren, 
 			no sea takimata sanctus est Lorem ipsum dolor sit amet.
 			</p>
+
+
 			<p>
 			Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
 			sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
