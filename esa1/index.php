@@ -9,6 +9,7 @@
 		 <ul>
 			<li><?php echo"<a href='index.php'>Main</a>"; ?></li>
 			<li><?php echo"<a href='next.php'>Projektkontakt</a>"; ?></li>
+			<li><?php echo"<a href='next2.php'>Fill Data</a>"; ?></li>
 			
 
 		 </ul>
