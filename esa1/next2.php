@@ -17,7 +17,7 @@
 		<section>
 		
         <form action="next.php" method="GET">
-  <label for="personen">Choose a person:</label>
+  <label for="personen">Wähle ein Projektkontakt:</label>
   <select id="personen" name="personen">
     <option value="0">1</option>
     <option value="1">2</option>
@@ -25,7 +25,7 @@
     <option value="3">4</option>
     <option value="4">5</option>
   </select>
-  <button type="submit">Next</button>
+  <button type="submit">Kontakt laden</button>
 </form>
 		</section>
 	</body>
