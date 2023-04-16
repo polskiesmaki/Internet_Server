@@ -4,7 +4,7 @@
 	<title>Main</title>
 	</head>
 	<body>
-		<header> <h1>Test</h1> </header>
+		<header> <h1>Main</h1> </header>
 		<nav>
 		 <ul>
 			<li><?php echo"<a href='index.php'>Main</a>"; ?></li>

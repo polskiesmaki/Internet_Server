@@ -1,10 +1,10 @@
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>Projektkontakt</title>
+	<title>Wähle ein Pojektkontakt</title>
 	</head>
 	<body>
-		<header> <h1>Projektkontakt</h1> </header>
+		<header> <h1>Wähle ein Pojektkontakt</h1> </header>
 		<nav>
 		 <ul>
 			<li><?php echo"<a href='index.php'>Main</a>"; ?></li>
@@ -17,7 +17,7 @@
 		<section>
 		
         <form action="next.php" method="GET">
-  <label for="personen">Wähle ein Projektkontakt:</label>
+  <label id="wahl" for="personen">Wähle ein Projektkontakt:</label>
   <select id="personen" name="personen">
     <option value="0">1</option>
     <option value="1">2</option>
@@ -25,7 +25,7 @@
     <option value="3">4</option>
     <option value="4">5</option>
   </select>
-  <button type="submit">Kontakt laden</button>
+  <button type="submit" id="button_load">Kontakt laden</button>
 </form>
 		</section>
 	</body>
