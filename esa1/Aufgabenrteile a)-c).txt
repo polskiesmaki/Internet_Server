@@ -1,0 +1,102 @@
+index.html 
+<!--Aufgabenteil a)-->
+			
+<header>
+	<h1>Test</h1>
+</header>
+<nav>
+	<ul>
+		<li><a href="index.html">Main</a></li>
+	</ul>
+<main>
+			        
+	<p> Hier steht ein kleiner Text.</p>
+		<figure>
+			<img src="test.png" alt="Bild einer Kamera">
+			<figcaption> Bild einer Kamera</figcaption>
+		</figure>
+	<p> Hier noch ein Abschnitt..</p>
+</main>
+		
+<!--Aufgabenteil b)-->
+
+<header>
+	<h1>Test</h1>
+</header>
+<nav>
+	<ul>
+		<li><?php //echo"<a href='index.php'>Main</a>"; ?></li>
+		<li><?php //echo"<a href='next.php'>Projektkontakt</a>"; ?></li>
+	</ul>
+<main>
+			        
+	<p> Hier steht ein kleiner Text.</p>
+		<figure>
+			<img src="test.png" alt="Bild einer Kamera">
+			<figcaption> Bild einer Kamera</figcaption>
+		</figure>
+	<p> Hier noch ein Abschnitt..</p>	    
+</main>
+
+next.html
+<!-- Aufgabenteil b) -->
+			
+<header> 
+	<h1>Projektkontakt</h1> 
+</header>
+<nav>
+	<ul>
+		<li><?php echo"<a href='index.php'>Main</a>"; ?></li>
+		<li><?php echo"<a href='next.php'>Projektkontakt</a>"; ?></li>
+	</ul>
+</nav>
+<main>
+	<h1> Projektkontakt </h1>
+		<form action=''>
+			<label for="vname">Vorname
+			<input type="text" id="vname" name="vname">
+			</label>
+			<label for="nname">Nachname
+		        <input type="text" id="nname" name="nname">
+			</label>
+			<label for="mail">E-mail
+			<input type="email" id="mail" name="mail">
+			</label>
+			<label for="tel">Telefonnummer
+			<input type="number" id="tel" name="tel">
+			</label>
+			<input type='submit' value='Submit'/>
+		</form>
+</main>	    
+			
+<!-- Aufgabenteil c) -->
+			
+<header> 
+	<h1>Projektkontakt</h1> 
+</header>
+<nav>
+	<ul>
+		<li><?php echo"<a href='index.php'>Main</a>"; ?></li>
+		<li><?php echo"<a href='next.php'>Projektkontakt</a>"; ?></li>
+	</ul>
+</nav>
+<main>
+	<h1> Projektkontakt </h1>
+		<form action=''>
+		<?php
+			echo "<label for='vname'>Vorname
+			      <input id='vname' type='text' name='vname' placeholder='Texteingabe'>
+			      </label>";
+			echo "<label for='nname'>Nachname
+				<input id='nname' type='text' name='nname' placeholder='Texteingabe'>
+				</label>";
+			echo "<label for='mail'>E-mail
+				<input id='mail' type='email' name='mail' placeholder='Eingabe einer E-Mailadresse'>
+				</label>";
+			echo "<label for='tel'>Telefonnummer
+				<input id='tel' type='tel' name='tel' placeholder='Eingabe v. Ortsvorwahl und Anschluss'>
+				</label>";
+		?>
+			<input type='submit' value='Submit'/>
+		 </form>
+</main>	  
