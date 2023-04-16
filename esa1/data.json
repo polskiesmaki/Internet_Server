@@ -23,13 +23,13 @@
       "vorname": "Hans",
       "nachname": "Müller",
       "telefonnummer": "555-555-1548",
-      "email": "hans.müller@example.com"
+      "email": "hans.mueller@example.com"
     },
     {
       "vorname": "Karl",
       "nachname": "Müller",
       "telefonnummer": "555-555-5847",
-      "email": "karl.müller@example.com"
+      "email": "karl.mueller@example.com"
     }
   ]
 }
