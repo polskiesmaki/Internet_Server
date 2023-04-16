@@ -18,6 +18,7 @@
 		<form action = ''> 
 			 
 		<?php
+		if(isset($_GET['personen'])) {
 		// Get the selected index from the URL
 		$selected_index = $_GET['personen'];
 
@@ -35,11 +36,17 @@
 
 		// Output the HTML code with the input field pre-filled with the value of "vname"
 		//echo "<p><label>Vorname <input id='vname' type='text' placeholder='Texteingabe' required value='$vname' /></label></p>";
-
-		echo "<p><label>Vorname <input id='vname' type='text' placeholder='Texteingabe' required value='$vname' /></label></p>";
-		echo "<p><label>Nachname <input id='nname' type='text' placeholder='Texteingabe' required value='$nname' /></label></p>";
-		echo "<p><label>E-Mail <input id='email' type='email' placeholder='Eingabe einer E-Mailadresse' required value='$email' /></label></p>";
-		echo "<p><label>Telefonnummer <input id='tnr' type='tel' placeholder='Eingabe v. Ortsvorwahl und Anschluss' required value='$tnr' /></label></p>";
+		
+			echo "<p><label>Vorname <input id='vname' type='text' placeholder='Texteingabe' required value='$vname' /></label></p>";
+			echo "<p><label>Nachname <input id='nname' type='text' placeholder='Texteingabe' required value='$nname' /></label></p>";
+			echo "<p><label>E-Mail <input id='email' type='email' placeholder='Eingabe einer E-Mailadresse' required value='$email' /></label></p>";
+			echo "<p><label>Telefonnummer <input id='tnr' type='tel' placeholder='Eingabe v. Ortsvorwahl und Anschluss' required value='$tnr' /></label></p>";
+		} else {
+			echo "<p><label>Vorname <input id='vname' type='text' placeholder='Texteingabe' required /></label></p>";
+			echo "<p><label>Nachname <input id='nname' type='text' placeholder='Texteingabe' required /></label></p>";
+			echo "<p><label>E-Mail <input id='email' type='email' placeholder='Eingabe einer E-Mailadresse' required /></label></p>";
+			echo "<p><label>Telefonnummer <input id='tnr' type='tel' placeholder='Eingabe v. Ortsvorwahl und Anschluss' required /></label></p>";
+		}
 		
 ?>			
 			<input type='submit' value='Submit'/>
