@@ -48,7 +48,7 @@
 			echo "<p><label>Telefonnummer <input id='tnr' type='tel' placeholder='Eingabe v. Ortsvorwahl und Anschluss' required /></label></p>";
 		}
 		
-?>			
+		?>			
 			<input type='submit' value='Submit' />
 			
 		</form>
