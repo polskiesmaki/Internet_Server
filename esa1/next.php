@@ -45,9 +45,6 @@
 				$tnr = $json_object->personen[$selected_index]->telefonnummer;
 
 				// Output the HTML code with the input field pre-filled with the value of "vname"
-				//echo "<p><label>Vorname <input id='vname' type='text' placeholder='Texteingabe' required value='$vname' /></label></p>";
-			
-
 				echo "<p><label>Vorname <input id='vname' type='text' placeholder='Texteingabe' required value='$vname' /></label></p>";
 				echo "<p><label>Nachname <input id='nname' type='text' placeholder='Texteingabe' required value='$nname' /></label></p>";
 				echo "<p><label>E-Mail <input id='email' type='email' placeholder='Eingabe einer E-Mailadresse' required value='$email' /></label></p>";
