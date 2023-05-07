@@ -1,21 +1,30 @@
 <?php
-// Laden der Daten aus der JSON-Datei
-$data = json_decode(file_get_contents('data.json'), true);
+// Laden Sie den Inhalt der JSON-Datei in eine Variable
+$json_file = 'data.json';
+$json_data = file_get_contents($json_file);
+$data = json_decode($json_data, true);
 
-// Verarbeiten des Formulars für das Bearbeiten eines Kontakts
-if (isset($_POST['update'])) {
-	$person = array(
-		'vorname' => $_POST['vorname'],
-		'nachname' => $_POST['nachname'],
-		'telefon' => $_POST['telefon'],
-		'email' => $_POST['email']
-	);
-	$data['personen'][$_POST['id']] = $person;
-	file_put_contents('data.json', json_encode($data));
-	header('Location: aufgabe_c.php');
-	exit;
+$id = $_GET['id'];
+
+$person = $data['personen'][$id];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	// Aktualisieren Sie die Personendaten
+	$data['personen'][$id]['vorname'] = $_POST['vorname'];
+	$data['personen'][$id]['nachname'] = $_POST['nachname'];
+	$data['personen'][$id]['email'] = $_POST['email'];
+	$data['personen'][$id]['telefonnummer'] = $_POST['telefonnummer'];
+
+	// Speichern Sie die aktualisierten Daten in der JSON-Datei
+	$json_data = json_encode($data);
+	file_put_contents($json_file, $json_data);
+
+	// Weiterleitung zur Liste der Personen
+	header('Location: aufgabe_c_bearbeitenansicht.php');
+	exit();
 }
 ?>
+
 <html>
 
 <head>
@@ -25,13 +34,13 @@ if (isset($_POST['update'])) {
 
 <body>
 	<header>
-		<h1>Projektkontakt</h1>
+		<h1>Projektkontakt Bearbeiten</h1>
 	</header>
 	<div>
 		<h2>
 			<?php echo $person['vorname'] . ' ' . $person['nachname']; ?>
 		</h2>
-		<form action="aufgabe_c.php" method="post">
+		<form action="" method="post">
 			<p>
 				<label for="vorname">Vorname:</label>
 				<input type="text" id="vorname" name="vorname" value="<?php echo $person['vorname']; ?>" required>
@@ -50,10 +59,9 @@ if (isset($_POST['update'])) {
 					value="<?php echo $person['telefonnummer']; ?>" required>
 			</p>
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
-			<button><a href="aufgabe_b.php">Zurück</a></button>
-
+			<button type="submit">Speichern</button>
+			<button><a href="aufgabe_c.php">Zurück</a></button>
 		</form>
-
 	</div>
 </body>
 

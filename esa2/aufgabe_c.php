@@ -32,6 +32,7 @@ if (isset($_POST['update'])) {
 
 // Verarbeiten des Löschens eines Kontakts
 if (isset($_GET['delete'])) {
+    $data = json_decode(file_get_contents('data.json'), true);
     array_splice($data['personen'], $_GET['delete'], 1);
     file_put_contents('data.json', json_encode($data));
     header('Location: aufgabe_c.php');
@@ -39,7 +40,7 @@ if (isset($_GET['delete'])) {
 }
 ?>
 
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -64,20 +65,34 @@ if (isset($_GET['delete'])) {
             ?>
             <?php foreach ($data['personen'] as $key => $person) { ?>
                 <tr>
-                    <td><a href="aufgabe_c_bearbeitenansicht.php?id=<?php echo $key; ?>">
+                    <td><a href="aufgabe_c_detailansicht.php?id=<?php echo $key; ?>">
                             <?php echo $person['nachname'] . ', ' . $person['vorname']; ?></a></td>
-                    <td>
-                        <form action="aufgabe_c_bearbeitenansicht.php" method="post" style="display: inline;">
-                            <input type="hidden" name="id" value="<?php echo $key; ?>">
-                            <button type="submit">
-                                <img src="img\bearbeiten.png" alt="Bearbeiten" title="Bearbeiten">
-                            </button>
-                        </form>
-                        <form action="aufgabe_c.php" method="get" style="display: inline;">
-                            <input type="hidden" name="delete" value="<?php echo $key; ?>">
-                            <button type="submit">
-                                <img src="img\loeschen.png" alt="Löschen" title="Löschen">
-                            </button>
-                        </form>
                 </tr>
-            <?php } ?>
+                <td>
+                    <form action="aufgabe_c_bearbeitenansicht.php?id=<?php echo $key; ?>" method="get"
+                        style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $key; ?>">
+                        <button type="submit">
+                            <img src="img\bearbeiten.png" alt="Bearbeiten" title="Bearbeiten">
+                        </button>
+                    </form>
+                    <form action="aufgabe_c.php" method="get" style="display: inline;">
+                        <input type="hidden" name="delete" value="<?php echo $key; ?>">
+                        <button type="submit">
+                            <img src="img\loeschen.png" alt="Löschen" title="Löschen">
+                        </button>
+                    </form>
+                <?php } ?>
+        </tbody>
+    </table>
+
+    <form action="aufgabe_c_erstellenansicht.php" method="get" style="display: inline;">
+        <input type="hidden" name="create">
+        <button type="submit">
+            <img src="img\plus.png" alt="Erstellen" title="Erstellen">
+        </button>
+    </form>
+</body>
+
+
+</html>
