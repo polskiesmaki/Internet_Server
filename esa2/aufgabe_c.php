@@ -52,6 +52,9 @@ if (isset($_GET['delete'])) {
     <header>
         <h1>Projektkontakte Liste</h1>
     </header>
+	<nav>
+	<a href="index.html">Zurück</a><br>
+	</nav>
     <table id="personen-tabelle">
         <thead>
             <tr>
@@ -72,13 +75,13 @@ if (isset($_GET['delete'])) {
                     <form action="aufgabe_c_bearbeitenansicht.php?id=<?php echo $key; ?>" method="get"
                         style="display: inline;">
                         <input type="hidden" name="id" value="<?php echo $key; ?>">
-                        <button type="submit">
+                        <button class="ausnahme" type="submit">
                             <img src="img\bearbeiten.png" alt="Bearbeiten" title="Bearbeiten">
                         </button>
                     </form>
                     <form action="aufgabe_c.php" method="get" style="display: inline;">
                         <input type="hidden" name="delete" value="<?php echo $key; ?>">
-                        <button type="submit">
+                        <button class="ausnahme" type="submit">
                             <img src="img\loeschen.png" alt="Löschen" title="Löschen">
                         </button>
                     </form>
@@ -86,9 +89,9 @@ if (isset($_GET['delete'])) {
         </tbody>
     </table>
 
-    <form action="aufgabe_c_erstellenansicht.php" method="get" style="display: inline;">
-        <input type="hidden" name="create">
-        <button type="submit">
+    <form  action="aufgabe_c_erstellenansicht.php" method="get" style="display: inline;">
+        <input  type="hidden" name="create">
+        <button  class="ausnahme" type="submit">
             <img src="img\plus.png" alt="Erstellen" title="Erstellen">
         </button>
     </form>

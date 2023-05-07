@@ -9,6 +9,9 @@
     <header>
         <h1>Projektkontakte Liste</h1>
     </header>
+	<nav>
+	<a href="index.html">Zurück</a><br>
+	</nav>
     <table id="personen-tabelle">
         <thead>
             <tr>

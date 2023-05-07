@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					value="<?php echo $person['telefonnummer']; ?>" required>
 			</p>
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
-			<button type="submit">Speichern</button>
+			<button class="extra" type="submit">Speichern</button>
 			<button><a href="aufgabe_c.php">Zurück</a></button>
 		</form>
 	</div>

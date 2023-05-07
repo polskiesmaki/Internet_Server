@@ -54,12 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		</h2>
 		<form action="" method="post">
 			<p>
-				<label for="vorname" placeholder='Vorname'>Vorname:</label>
-				<input type="text" id="vorname" name="vorname" required>
+				<label for="vorname" >Vorname:</label>
+				<input placeholder='Texteingabe' type="text" id="vorname" name="vorname" required>
 			</p>
 			<p>
 				<label for="nachname">Nachname:</label>
-				<input type="text" id="nachname" name="nachname" required>
+				<input placeholder='Texteingabe' type="text" id="nachname" name="nachname" required>
 			</p>
 			<p>
 				<label for="email">E-Mail:</label>
@@ -70,5 +70,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<input placeholder='Eingabe v. Ortsvorwahl und Anschluss' type="tel" id="telefonnummer"
 					name="telefonnummer" required>
 			</p>
-			<button type="submit">Speichern</button>
+			<button class="extra" type="submit">Speichern</button>
 			<button><a href="aufgabe_c.php">Zurück</a

@@ -11,12 +11,12 @@ $person = $data['personen'][$id];
 
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>Projektkontakt</title>
+	<title>Detailansicht</title>
 </head>
 
 <body>
 	<header>
-		<h1>Projektkontakt</h1>
+		<h1>Detailansicht</h1>
 	</header>
 	<div>
 		<h2>
