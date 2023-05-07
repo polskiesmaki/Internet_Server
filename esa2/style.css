@@ -1,0 +1,101 @@
+
+body {
+  background-color: #886b6b77;
+}       
+p {
+  color: #333;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  text-align: center;
+}
+textarea
+{
+    font-family: inherit;    
+}
+
+form {
+    border: 1px solid black;
+    width: 90%;
+    background-color: whitesmoke;
+    margin: 0 auto;
+    padding: 0 1em;
+
+}
+
+form label {
+    display: block;
+    font-size: 0.8em;
+    color: darkslategrey;
+    padding-left: 3px;    
+    
+}
+
+input,
+textarea
+{
+    width: 100%;
+    font-size: 1.1em; 
+    padding: 4px;
+    font-family: inherit;
+    font-weight: lighter;
+    border:1px solid gray;
+    outline: none;
+    border-radius: 0.3em;
+}    
+
+input:focus,
+textarea:focus { 
+    border:1px solid orange;
+}
+
+input[type=submit] {
+   background-color: #ffffff77;
+    cursor: pointer;
+    width: 14em;
+    padding: .3em 0;
+    border-radius: 0.7em;
+    margin-bottom: 1em;
+}
+
+input[type=submit]:hover {
+    background-color: rgb(59, 58, 58);
+    box-shadow: 2px 2px 2px grey;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  margin-bottom: 1em;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+#wahl{
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+#button_load{
+  margin-bottom: 1em;
+}
