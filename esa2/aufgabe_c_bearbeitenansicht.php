@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$json_data = json_encode($data);
 	file_put_contents($json_file, $json_data);
 
-	// Weiterleitung zur Liste der Personen
-	header('Location: aufgabe_c_bearbeitenansicht.php');
+	// Weiterleitung zur bearbeiteten Person
+	header('Location: aufgabe_c_bearbeitenansicht.php?id=' . $id);
 	exit();
 }
 ?>
