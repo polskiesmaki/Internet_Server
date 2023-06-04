@@ -10,7 +10,7 @@
 		<h1>Projektkontakt</h1>
 	</header>
 	<nav>
-	<a href="index.html">Zurück</a><br>
+		<a href="index.html">Zurück</a><br>
 	</nav>
 
 	<section>
@@ -45,6 +45,8 @@
 				echo "<p><label>E-Mail <input id='email' type='email' placeholder='Eingabe einer E-Mailadresse' required /></label></p>";
 				echo "<p><label>Telefonnummer <input id='tnr' type='tel' placeholder='Eingabe v. Ortsvorwahl und Anschluss' required /></label></p>";
 			}
+
+
 
 			?>
 			<input type='submit' value='Submit' />
