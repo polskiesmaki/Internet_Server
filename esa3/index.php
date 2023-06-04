@@ -1,4 +1,11 @@
-<?php
+<?php declare(strict_types=1);
+
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'db.php';
+
+// Datenbankabfrage über die Klasse StudentRepository() vornehmen
+$kontaktRepository = new KontaktRepository($pdo);
+$kontakt = $kontaktRepository->showKontacts();
+
 // Laden der Daten aus der JSON-Datei
 $data = json_decode(file_get_contents('data.json'), true);
 
@@ -63,13 +70,11 @@ if (isset($_GET['delete'])) {
             </tr>
         </thead>
         <tbody>
-            <?php $json_data = file_get_contents('data.json');
-            $data = json_decode($json_data, true);
-            ?>
-            <?php foreach ($data['personen'] as $key => $person) { ?>
+
+            <?php foreach ($kontakt as $key => $person) { ?>
                 <tr>
                     <td><a href="detailansicht.php?id=<?php echo $key; ?>">
-                            <?php echo $person['nachname'] . ', ' . $person['vorname']; ?></a></td>
+                            <?php echo $person->nachname . ', ' . $person->vorname; ?></a></td>
                 </tr>
                 <td>
                     <form action="bearbeitenansicht.php?id=<?php echo $key; ?>" method="get" style="display: inline;">
@@ -89,7 +94,8 @@ if (isset($_GET['delete'])) {
     </table>
 
     <form action="erstellenansicht.php" method="get" style="display: inline;">
-        <input type="hidden" name="create">
+        <input type="hidden" name="create" value="<?php echo htmlspecialchars(json_encode($kontakt)); ?>">
+
         <button class="ausnahme" type="submit">
             <img src="img\plus.png" alt="Erstellen" title="Erstellen">
         </button>

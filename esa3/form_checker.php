@@ -1,8 +1,9 @@
 <?php
-// Laden Sie den Inhalt der JSON-Datei in eine Variable
-$json_file = 'data.json';
-$json_data = file_get_contents($json_file);
-$data = json_decode($json_data, true);
+declare(strict_types=1);
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'db.php';
+
+// Datenbankabfrage über die Klasse StudentRepository() vornehmen
+$kontaktRepository = new KontaktRepository($pdo);
 
 //Variablen für die Überprüfung der Eingaben
 $vornameTrue = false;
@@ -44,8 +45,9 @@ if (isset($_POST['nachname'])) {
 
 if (isset($_POST['email'])) {
     // Überprüfen, ob bereits ein Kontakt mit derselben E-Mail-Adresse vorhanden ist
-    foreach ($data['personen'] as $contact) {
-        if ($contact['email'] == $_POST['email']) {
+    $contacts = $kontaktRepository->showKontacts();
+    foreach ($contacts as $contact) {
+        if ($contact->email == $_POST['email']) {
             echo "<script>
             alert('E-Mail-Adresse bereits vorhanden!');
             window.history.back();
@@ -68,7 +70,7 @@ if (isset($_POST['email'])) {
 
 if (isset($_POST['telefonnummer'])) {
     // Regular Expression für die Überprüfung der Vorwahl und der Ortsvorwahl
-    $pattern = '/^(015|016|017[15678])\d{6,}$/';
+    $pattern = '/^(015|016|017[15678])\d{6,30}$/';
 
     // Überprüfung der Vorwahl und der Ortsvorwahl mit Regular Expression
     if (preg_match($pattern, $_POST['telefonnummer'])) {
@@ -84,20 +86,8 @@ if (isset($_POST['telefonnummer'])) {
 }
 // Wenn alle Daten gültig sind, dann fügen Sie den neuen Kontakt hinzu
 if ($vornameTrue && $nachnameTrue && $emailTrue && $telefonnummerTrue) {
+    $kontaktRepository->insertKontakt($_POST['vorname'], $_POST['nachname'], $_POST['email'], $_POST['telefonnummer']);
 
-    $new_contact = [
-        'vorname' => $_POST['vorname'],
-        'nachname' => $_POST['nachname'],
-        'email' => $_POST['email'],
-        'telefonnummer' => $_POST['telefonnummer']
-    ];
-
-    // Hinzufügen des neuen Kontakts zur Liste der Kontakte
-    $data['personen'][] = $new_contact;
-
-    // Speichern Sie die aktualisierten Daten in der JSON-Datei
-    $json_data = json_encode($data);
-    file_put_contents($json_file, $json_data);
     echo "<script>alert('Die Daten wurden erfolgreich übermittelt');</script>";
     echo "<script>window.location.href='index.php';</script>";
 }
