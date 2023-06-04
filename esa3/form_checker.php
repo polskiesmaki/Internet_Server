@@ -14,7 +14,7 @@ $telefonnummerTrue = false;
 /**
  * Wenn Vorname, Nachname, Email und Telefonnummer gesetzt sind,
  * dann überprüfen Sie die Eingaben
- * */
+ */
 if (isset($_POST['vorname'])) {
     // Regular Expression für die Überprüfung des Vornamens
     $pattern = '/^[A-Z][a-z]{1,30}$/';
@@ -44,17 +44,6 @@ if (isset($_POST['nachname'])) {
 }
 
 if (isset($_POST['email'])) {
-    // Überprüfen, ob bereits ein Kontakt mit derselben E-Mail-Adresse vorhanden ist
-    $contacts = $kontaktRepository->showKontacts();
-    foreach ($contacts as $contact) {
-        if ($contact->email == $_POST['email']) {
-            echo "<script>
-            alert('E-Mail-Adresse bereits vorhanden!');
-            window.history.back();
-        </script>";
-            exit();
-        }
-    }
     // Regular Expression für die Überprüfung der Email
     $pattern = '/\w{1,30}@ostfalia\.(com|de)$/';
     if (preg_match($pattern, $_POST['email'])) {
@@ -84,9 +73,17 @@ if (isset($_POST['telefonnummer'])) {
         exit;
     }
 }
-// Wenn alle Daten gültig sind, dann fügen Sie den neuen Kontakt hinzu
+
+// Wenn alle Daten gültig sind, dann aktualisieren Sie den Kontakt
 if ($vornameTrue && $nachnameTrue && $emailTrue && $telefonnummerTrue) {
-    $kontaktRepository->insertKontakt($_POST['vorname'], $_POST['nachname'], $_POST['email'], $_POST['telefonnummer']);
+    $id = $_POST['id'];
+    $vorname = $_POST['vorname'];
+    $nachname = $_POST['nachname'];
+    $email = $_POST['email'];
+    $telefonnummer = $_POST['telefonnummer'];
+
+    // Aktualisieren Sie die Daten in der Datenbank
+    $kontaktRepository->updatePerson($id, $vorname, $nachname, $email, $telefonnummer);
 
     echo "<script>alert('Die Daten wurden erfolgreich übermittelt');</script>";
     echo "<script>window.location.href='index.php';</script>";

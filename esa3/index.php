@@ -1,52 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'db.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'KontaktRepository.php';
 
-// Datenbankabfrage über die Klasse StudentRepository() vornehmen
 $kontaktRepository = new KontaktRepository($pdo);
 $kontakt = $kontaktRepository->showKontacts();
 
-// Laden der Daten aus der JSON-Datei
-$data = json_decode(file_get_contents('data.json'), true);
-
-// Verarbeiten des Formulars für das Erstellen eines neuen Kontakts
-if (isset($_POST['create'])) {
-    $person = array(
-        'vorname' => $_POST['vorname'],
-        'nachname' => $_POST['nachname'],
-        'telefon' => $_POST['telefon'],
-        'email' => $_POST['email']
-    );
-    array_push($data['personen'], $person);
-    file_put_contents('data.json', json_encode($data));
-    header('Location: index.php');
-    exit;
-}
-
-// Verarbeiten des Formulars für das Bearbeiten eines Kontakts
-if (isset($_POST['update'])) {
-    $person = array(
-        'vorname' => $_POST['vorname'],
-        'nachname' => $_POST['nachname'],
-        'telefon' => $_POST['telefon'],
-        'email' => $_POST['email']
-    );
-    $data['personen'][$_POST['id']] = $person;
-    file_put_contents('data.json', json_encode($data));
-    header('Location: index.php');
-    exit;
-}
-
 // Verarbeiten des Löschens eines Kontakts
 if (isset($_GET['delete'])) {
-    $data = json_decode(file_get_contents('data.json'), true);
-    array_splice($data['personen'], $_GET['delete'], 1);
-    file_put_contents('data.json', json_encode($data));
+    $id = $_GET['delete'];
+    $kontaktRepository->deletePerson($id);
+
     header('Location: index.php');
-    exit;
+    exit();
 }
 ?>
-
 
 <html>
 
@@ -66,41 +35,41 @@ if (isset($_GET['delete'])) {
         <thead>
             <tr>
                 <th>Name</th>
-
             </tr>
         </thead>
         <tbody>
-
-            <?php foreach ($kontakt as $key => $person) { ?>
+            <?php foreach ($kontakt as $person) { ?>
                 <tr>
-                    <td><a href="detailansicht.php?id=<?php echo $key; ?>">
-                            <?php echo $person->nachname . ', ' . $person->vorname; ?></a></td>
+                    <td>
+                        <a href="detailansicht.php?id=<?php echo $person->id; ?>">
+                            <?php echo $person->nachname . ', ' . $person->vorname; ?>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="bearbeitenansicht.php" method="get" style="display: inline;">
+                            <input type="hidden" name="id" value="<?php echo $person->id; ?>">
+                            <button class="ausnahme" type="submit">
+                                <img src="img\bearbeiten.png" alt="Bearbeiten" title="Bearbeiten">
+                            </button>
+                        </form>
+                        <form action="index.php" method="get" style="display: inline;">
+                            <input type="hidden" name="delete" value="<?php echo $person->id; ?>">
+                            <button class="ausnahme" type="submit">
+                                <img src="img\loeschen.png" alt="Löschen" title="Löschen">
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-                <td>
-                    <form action="bearbeitenansicht.php?id=<?php echo $key; ?>" method="get" style="display: inline;">
-                        <input type="hidden" name="id" value="<?php echo $key; ?>">
-                        <button class="ausnahme" type="submit">
-                            <img src="img\bearbeiten.png" alt="Bearbeiten" title="Bearbeiten">
-                        </button>
-                    </form>
-                    <form action="index.php" method="get" style="display: inline;">
-                        <input type="hidden" name="delete" value="<?php echo $key; ?>">
-                        <button class="ausnahme" type="submit">
-                            <img src="img\loeschen.png" alt="Löschen" title="Löschen">
-                        </button>
-                    </form>
-                <?php } ?>
+            <?php } ?>
         </tbody>
     </table>
 
     <form action="erstellenansicht.php" method="get" style="display: inline;">
         <input type="hidden" name="create" value="<?php echo htmlspecialchars(json_encode($kontakt)); ?>">
-
         <button class="ausnahme" type="submit">
             <img src="img\plus.png" alt="Erstellen" title="Erstellen">
         </button>
     </form>
 </body>
-
 
 </html>

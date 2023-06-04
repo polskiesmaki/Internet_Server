@@ -1,35 +1,47 @@
-<?php
-// Laden Sie den Inhalt der JSON-Datei in eine Variable
-$json_file = 'data.json';
-$json_data = file_get_contents($json_file);
-$data = json_decode($json_data, true);
+<?php declare(strict_types=1);
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'db.php';
+
+// Datenbankabfrage über die Klasse StudentRepository() vornehmen
+$kontaktRepository = new KontaktRepository($pdo);
 
 $id = $_GET['id'];
 
-$person = $data['personen'][$id];
+$person = $kontaktRepository->getPersonById($id);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Aktualisieren Sie die Personendaten
-	$data['personen'][$id]['vorname'] = $_POST['vorname'];
-	$data['personen'][$id]['nachname'] = $_POST['nachname'];
-	$data['personen'][$id]['email'] = $_POST['email'];
-	$data['personen'][$id]['telefonnummer'] = $_POST['telefonnummer'];
+	$vorname = $_POST['vorname'];
+	$nachname = $_POST['nachname'];
+	$email = $_POST['email'];
+	$telefonnummer = $_POST['telefonnummer'];
 
-	// Speichern Sie die aktualisierten Daten in der JSON-Datei
-	$json_data = json_encode($data);
-	file_put_contents($json_file, $json_data);
+	// Überprüfen, ob bereits ein Kontakt mit derselben E-Mail-Adresse vorhanden ist
+	$contacts = $kontaktRepository->showKontacts();
+	foreach ($contacts as $contact) {
+		if ($contact->email == $email && $contact->id != $id) {
+			echo "<script>
+            alert('E-Mail-Adresse bereits vorhanden!');
+            window.history.back();
+        </script>";
+			exit();
+		}
+	}
+
+	// Aktualisieren Sie die Daten in der Datenbank
+	$kontaktRepository->updatePerson($id, $vorname, $nachname, $email, $telefonnummer);
 
 	// Weiterleitung zur bearbeiteten Person
-	header('Location: bearbeitenansicht.php?id=' . $id);
+	header('Location: index.php?id=' . $id);
 	exit();
 }
+
 ?>
 
 <html>
 
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>Projektkontakt</title>
+	<title>Projektkontakt Bearbeiten</title>
 </head>
 
 <body>
@@ -38,25 +50,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</header>
 	<div>
 		<h2>
-			<?php echo $person['vorname'] . ' ' . $person['nachname']; ?>
+			<?php echo $person->vorname . ' ' . $person->nachname; ?>
 		</h2>
-		<form action="" method="post">
+		<form action="form_checker.php" method="post">
 			<p>
 				<label for="vorname">Vorname:</label>
-				<input type="text" id="vorname" name="vorname" value="<?php echo $person['vorname']; ?>" required>
+				<input type="text" id="vorname" name="vorname" value="<?php echo $person->vorname; ?>" required>
 			</p>
 			<p>
 				<label for="nachname">Nachname:</label>
-				<input type="text" id="nachname" name="nachname" value="<?php echo $person['nachname']; ?>" required>
+				<input type="text" id="nachname" name="nachname" value="<?php echo $person->nachname; ?>" required>
 			</p>
 			<p>
 				<label for="email">E-Mail:</label>
-				<input type="email" id="email" name="email" value="<?php echo $person['email']; ?>" required>
+				<input type="email" id="email" name="email" value="<?php echo $person->email; ?>" required>
 			</p>
 			<p>
 				<label for="telefonnummer">Telefonnummer:</label>
-				<input type="tel" id="telefonnummer" name="telefonnummer"
-					value="<?php echo $person['telefonnummer']; ?>" required>
+				<input type="tel" id="telefonnummer" name="telefonnummer" value="<?php echo $person->telefonnummer; ?>"
+					required>
 			</p>
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
 			<button class="extra" type="submit">Speichern</button>

@@ -22,12 +22,54 @@ class KontaktRepository
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":telefonnummer", $telefonnummer);
         $stmt->execute();
-
-        // Ergebnis soll in "StudentModel" gefüllt werden
-        // Objekt "$student" der Klasse "StudentModel" wird 
-        // automatisch erstellt, ohne "$student = new StudentModel()" 
-        /// $stmt->setFetchMode(PDO::FETCH_CLASS, 'Projektkonatkt');
     }
+
+    public function updatePerson(
+        string $id,
+        string $vorname,
+        string $nachname,
+        string $email,
+        string $telefonnummer
+    ) {
+        $id = (int) $id; // Cast the $id to an integer
+        $stmt = $this->pdo->prepare(
+            "UPDATE personen 
+            SET vorname = :vorname, nachname = :nachname, email = :email, telefonnummer = :telefonnummer 
+            WHERE id = :id"
+        );
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":vorname", $vorname);
+        $stmt->bindParam(":nachname", $nachname);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":telefonnummer", $telefonnummer);
+        $stmt->execute();
+    }
+
+    public function deletePerson($id)
+    {
+        $id = (int) $id; // Cast the $id to an integer
+
+        $stmt = $this->pdo->prepare("DELETE FROM personen WHERE id = :id");
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    //getPersonById Funtion
+    public function getPersonById($id)
+    {
+        $id = (int) $id; // Cast the $id to an integer
+
+        $stmt = $this->pdo->prepare("SELECT * FROM personen WHERE id = :id");
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Projektkontakt');
+        $person = $stmt->fetch();
+
+        return $person;
+    }
+
+
 
     public function showKontacts()
     {
@@ -36,9 +78,6 @@ class KontaktRepository
         );
         $stmt->execute();
 
-        // Ergebnis soll in "StudentModel" gefüllt werden
-        // Objekt "$student" der Klasse "StudentModel" wird 
-        // automatisch erstellt, ohne "$student = new StudentModel()" 
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Projektkontakt');
         $student = $stmt->fetchAll(PDO::FETCH_CLASS, "Projektkontakt");
 
