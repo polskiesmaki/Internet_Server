@@ -1,0 +1,19 @@
+{
+    "Person": {
+        "firstname": "John",
+        "lastname": "Doe",
+        "age": 50,
+        "hobbys": [
+            "reading",
+            "music",
+            "movies"
+        ],
+        "adress": {
+            "street": "Main St",
+            "houseNo": "5",
+            "postcode": 12345,
+            "city": "New York",
+            "country": "USA"
+        }
+    }
+}
